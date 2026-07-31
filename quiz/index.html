@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RE2 Quiz · Units 5–6 · Hidden Stories</title>
+<style>
+:root{
+  --ink:#22212b; --orange:#EA5B22; --orange-soft:#FFE3CE; --orange-deep:#C2461A;
+  --teal:#0C6A62; --teal-soft:#CDEBE6; --green:#189259; --green-soft:#CDEFDD;
+  --cream:#FFF8EF; --sun:#F6A623; --sun-soft:#FCE7BE; --pink-soft:#FBD6D6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);
+  font-family:"Comic Sans MS","Chalkboard SE","Comic Neue",-apple-system,"PingFang SC",sans-serif;
+  font-size:17px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding:18px 16px 80px}
+header.top{background:#fff;border-radius:18px;padding:18px 20px;margin-bottom:14px;
+  border:3px solid var(--orange);box-shadow:0 3px 0 var(--orange-soft)}
+h1{font-size:1.35em;margin:0 0 4px;color:var(--orange-deep)}
+.pill{display:inline-block;background:var(--teal-soft);color:var(--teal);border-radius:999px;
+  padding:2px 12px;font-size:.8em;margin-right:6px}
+.meta{font-size:.85em;color:#666}
+section.part{background:#fff;border-radius:18px;padding:16px 18px;margin:16px 0;border:2px solid #eee}
+h2{font-size:1.1em;background:var(--orange-soft);color:var(--orange-deep);
+  padding:8px 14px;border-radius:12px;margin:0 0 12px}
+h3{font-size:1em;color:var(--teal);margin:18px 0 8px}
+.marks{float:right;color:var(--orange);font-size:.85em;font-weight:700}
+.tag{display:inline-block;background:var(--teal-soft);color:var(--teal);border-radius:8px;
+  padding:1px 8px;font-size:.72em;margin-left:6px;vertical-align:middle}
+.anchor-tag{background:var(--sun-soft);color:#7a5200}
+.bank{background:#F3F7F4;border:2px dashed #8bbfae;border-radius:12px;padding:10px 14px;margin:8px 0;font-size:.95em}
+.passage{background:#FBF7EF;border-left:8px solid var(--sun);border-radius:0 12px 12px 0;
+  padding:12px 16px;margin:10px 0;text-align:justify}
+.passage p{margin:0 0 10px}
+.passage .pl{color:var(--teal);font-weight:700;margin-right:4px}
+.q{margin:14px 0;padding:10px 12px;border-radius:12px;background:#fafafa;border:1.5px solid #eee}
+.q .qt{margin-bottom:8px}
+label.opt{display:block;padding:10px 12px;margin:6px 0;border:2px solid #e5e0d8;border-radius:12px;
+  background:#fff;cursor:pointer;min-height:44px}
+label.opt:hover{border-color:var(--sun)}
+label.opt input{margin-right:8px;transform:scale(1.25)}
+input[type=text]{font-family:inherit;font-size:1em;border:none;border-bottom:2px solid #999;
+  background:transparent;min-width:130px;padding:6px 4px;text-align:center}
+input[type=text]:focus{outline:none;border-bottom-color:var(--orange)}
+select{font-family:inherit;font-size:.95em;padding:8px;border-radius:10px;border:2px solid #e5e0d8;
+  background:#fff;min-height:44px;max-width:100%}
+textarea{width:100%;min-height:180px;font-family:inherit;font-size:1em;border:2px solid #e5e0d8;
+  border-radius:12px;padding:12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--orange)}
+.note{background:var(--sun-soft);border-radius:10px;padding:8px 12px;font-size:.85em;color:#7a5200;margin:8px 0}
+.selfcheck label{display:block;margin:6px 0;min-height:32px}
+.btn{display:block;width:100%;min-height:56px;font-family:inherit;font-size:1.15em;font-weight:700;
+  background:var(--orange);color:#fff;border:none;border-radius:16px;cursor:pointer;margin:20px 0 8px}
+.btn:hover{background:var(--orange-deep)}
+.btn[disabled]{background:#ccc;cursor:not-allowed}
+#resultCard{display:none;background:#fff;border:3px solid var(--green);border-radius:18px;padding:18px 20px;margin:16px 0}
+#resultCard h2{background:var(--green-soft);color:#0f6b41}
+.scoreRow{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.scoreBox{flex:1 1 150px;background:var(--cream);border-radius:14px;padding:12px;text-align:center}
+.scoreBox .big{font-size:1.6em;font-weight:700;color:var(--orange-deep)}
+.stratTable{width:100%;border-collapse:collapse;font-size:.85em;margin:10px 0}
+.stratTable th{background:var(--teal-soft);color:var(--teal);padding:6px 8px;text-align:left}
+.stratTable td{border-top:1px solid #eee;padding:6px 8px}
+.flag{background:var(--pink-soft);color:#8c2020;border-radius:10px;padding:8px 12px;font-size:.9em;margin:8px 0}
+#copyBlock{width:100%;min-height:120px;font-size:.8em;font-family:monospace}
+.wordcount{font-size:.85em;color:#666;text-align:right}
+.missWarn{background:var(--pink-soft);color:#8c2020;border-radius:10px;padding:10px 14px;margin:10px 0;display:none}
+@media (max-width:600px){body{font-size:16px}.wrap{padding:12px 10px 60px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>Hidden Stories — Quiz</h1>
+  <div><span class="pill">RE2 · Units 5–6</span><span class="pill">45–60 minutes</span><span class="pill">100 marks</span></div>
+  <div class="meta" style="margin-top:6px">Name: <input type="text" id="stuName" placeholder="your name" style="min-width:160px;text-align:left"> &nbsp; Do the quiz in one sitting. Your teacher sees your time.</div>
+  <div class="note">Every reading question has a <b>strategy label</b>. You get a separate score for each strategy, so you can see which reading action is strong and which needs work.</div>
+</header>
+
+<!-- ================= PART 1 VOCABULARY ================= -->
+<section class="part" id="part1">
+<h2>Part 1 · Words <span class="marks">30 marks</span></h2>
+
+<h3>1A · Summary gap-fill — a NEW text, not from your book <span class="tag">10 × 2 marks</span></h3>
+<div class="note">Use the word bank. <b>Watch the word form</b> — you may need to change it. Two words in each bank are extra.</div>
+
+<p><b>Text 1 · The Quarry Behind the School</b></p>
+<div class="bank">collection · entire · eventually · display · credit · debt · remote <span class="meta">(two are extra — change the form where needed)</span></div>
+<div class="passage">
+<p>For forty years, Mr. Bell delivered letters in a small mountain town. After he retired, he began walking his dog in the empty quarry behind the school, filling his pockets with odd-looking stones. His <input type="text" id="v1" autocomplete="off"> grew until stones covered the <input type="text" id="v2" autocomplete="off"> kitchen table. One winter morning, he split a flat grey rock and found the print of a fern leaf inside — then another, and another. A university team studied the quarry and <input type="text" id="v3" autocomplete="off"> counted over two hundred plant fossils in its walls. The best pieces are now <input type="text" id="v4" autocomplete="off"> at the town library, and the label under the glass <input type="text" id="v5" autocomplete="off"> a retired postman and his curious dog for the find.</p>
+</div>
+
+<p><b>Text 2 · An Underwater Garden</b></p>
+<div class="bank">shallow · gather · pollution · release · brilliant · victim · construct <span class="meta">(two are extra — change the form where needed)</span></div>
+<div class="passage">
+<p>Off a small island, divers have planted a nursery for young coral. The pieces grow on metal frames in <input type="text" id="v6" autocomplete="off"> water close to the surface, where sunlight reaches them easily. After two years, the strongest pieces are <input type="text" id="v7" autocomplete="off"> and fixed onto a damaged reef nearby. The team also collects plastic waste, because <input type="text" id="v8" autocomplete="off"> is one of the main dangers the reef faces, and local boats have agreed to stop <input type="text" id="v9" autocomplete="off"> waste water near the site. Slowly, the reef is getting its <input type="text" id="v10" autocomplete="off"> blues and oranges back.</p>
+</div>
+
+<h3>1B · Old words — from Units 2–4 <span class="tag">5 × 2 marks</span></h3>
+<div class="note">You met these words weeks ago. This score is counted separately — it shows what you still remember.</div>
+<div class="bank">convince · diverse · ensure · likely · evolve · site <span class="meta">(one is extra — change the form where needed)</span></div>
+<div class="q"><div class="qt">1. It took me weeks to <input type="text" id="o1" autocomplete="off"> my parents that a lizard can be a good pet.</div></div>
+<div class="q"><div class="qt">2. Rainforests are among the most <input type="text" id="o2" autocomplete="off"> places on Earth.</div></div>
+<div class="q"><div class="qt">3. Packing your bag the night before <input type="text" id="o3" autocomplete="off"> that you forget nothing.</div></div>
+<div class="q"><div class="qt">4. If you never water a plant, it is <input type="text" id="o4" autocomplete="off"> to die.</div></div>
+<div class="q"><div class="qt">5. Birds <input type="text" id="o5" autocomplete="off"> from small dinosaurs over millions of years.</div></div>
+</section>
+
+<!-- ================= PART 2 READING ================= -->
+<section class="part" id="part2">
+<h2>Part 2 · Reading <span class="marks">45 marks</span></h2>
+<div class="note">Two NEW texts — you have not read them before. Read each one once, then answer.</div>
+
+<h3>Reading 1 · The Pools That Remember</h3>
+<div class="passage">
+<p><span class="pl">A</span>In the middle of the city of Los Angeles, black pools of natural asphalt have been rising from under the ground for tens of thousands of years. The asphalt looks solid, but in warm weather its surface turns soft and extremely sticky.</p>
+<p><span class="pl">B</span>Long ago, animals that walked across the pools could not pull their feet free. Because a trapped animal is easy prey, hunters such as wolves and big cats ran in to attack — and were caught themselves. As a result, the pools slowly filled with the bones of both the hunters and the hunted. The asphalt then covered the bones and kept air and water away, so they did not rot. That is why scientists have been able to remove millions of fossils from this one site.</p>
+<p><span class="pl">C</span>The work continues today. Each new find is cleaned, labeled, and arranged in drawers, and researchers uncover something new almost every week. They say the pools are like a diary of the city's past — and to read it, you simply have to dig.</p>
+</div>
+
+<div class="q"><div class="qt"><b>Q1.</b> What is the text mainly about? <span class="tag">strategy: main idea</span> <span class="marks">4</span></div>
+<label class="opt"><input type="radio" name="r1" value="a">a. why asphalt becomes sticky in warm weather</label>
+<label class="opt"><input type="radio" name="r1" value="b">b. how wolves and big cats used to hunt in Los Angeles</label>
+<label class="opt"><input type="radio" name="r1" value="c">c. how sticky pools trapped animals and kept their bones for scientists</label>
+</div>
+
+<div class="q"><div class="qt"><b>Q2.</b> Match each cause with its effect. <b>One effect is extra.</b> <span class="tag">strategy: cause–effect</span> <span class="marks">4</span></div>
+<div class="bank" style="font-size:.85em">
+a. Hunters ran in to attack — and were caught too.<br>
+b. The bones did not rot.<br>
+c. Something new is found almost every week.<br>
+d. Animals' feet got stuck.<br>
+e. The pools stopped rising long ago.</div>
+<div class="qt">1. The asphalt surface turns soft and sticky. → <select id="m1"><option value="">choose</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option></select></div>
+<div class="qt">2. A trapped animal is easy prey. → <select id="m2"><option value="">choose</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option></select></div>
+<div class="qt">3. The asphalt kept air and water away. → <select id="m3"><option value="">choose</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option></select></div>
+<div class="qt">4. Researchers keep digging at the site. → <select id="m4"><option value="">choose</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option></select></div>
+</div>
+
+<div class="q"><div class="qt"><b>Q3.</b> Why did hunters like wolves and big cats end up trapped in the pools? <span class="tag">strategy: cause–effect</span> <span class="marks">4</span></div>
+<label class="opt"><input type="radio" name="r3" value="a">a. They ran in to attack animals that were already trapped.</label>
+<label class="opt"><input type="radio" name="r3" value="b">b. They mistook the solid-looking asphalt for a safe place to rest.</label>
+<label class="opt"><input type="radio" name="r3" value="c">c. They fell in while drinking the rainwater that collected on top.</label>
+</div>
+
+<div class="q" data-anchor="1"><div class="qt"><b>Q4.</b> "…and to read <b>it</b>, you simply have to dig." What is <i>it</i>? <span class="tag">strategy: reference</span> <span class="marks">4</span></div>
+<label class="opt"><input type="radio" name="r4" value="a">a. a book that scientists wrote about Los Angeles</label>
+<label class="opt"><input type="radio" name="r4" value="b">b. the story of the past that the pools hold</label>
+<label class="opt"><input type="radio" name="r4" value="c">c. the label on each drawer of fossils</label>
+</div>
+
+<div class="q"><div class="qt"><b>Q5.</b> "…researchers <b>uncover</b> something new almost every week." <i>Uncover</i> means: <span class="tag">strategy: word parts</span> <span class="marks">3</span></div>
+<label class="opt"><input type="radio" name="r5" value="a">a. to find something that was hidden</label>
+<label class="opt"><input type="radio" name="r5" value="b">b. to put a cover back on something</label>
+<label class="opt"><input type="radio" name="r5" value="c">c. to clean something very carefully</label>
+</div>
+
+<div class="q"><div class="qt"><b>Q6.</b> The writer claims the pools are "like a diary of the city's past". Which fact best supports this claim? <span class="tag">strategy: analyzing claims</span> <span class="marks">3</span></div>
+<label class="opt"><input type="radio" name="r6" value="a">a. The asphalt looks solid from far away.</label>
+<label class="opt"><input type="radio" name="r6" value="b">b. Los Angeles is a very large city.</label>
+<label class="opt"><input type="radio" name="r6" value="c">c. Scientists have removed millions of fossils from this one site.</label>
+</div>
+
+<h3>Reading 2 · The Big Bad Wolf?</h3>
+<div class="passage">
+<p><span class="pl">A</span>In fairy tales, the wolf waits in the dark forest to attack people, and many people still believe that wolves are a serious danger to humans. However, the record tells a different story. Wild wolves are shy, and researchers who followed wolf packs for years report that the animals usually left the area quietly as soon as they noticed humans.</p>
+<p><span class="pl">B</span>Farmers, though, see another side. A wolf pack can kill several sheep in a single night, and even though a farmer may be paid for such losses, the payment often arrives months late. For a small farm, that wait is a real problem.</p>
+<p><span class="pl">C</span>Where does the old fear come from? It is thought that stories about dangerous wolves were first told to keep children from wandering into the forest alone. Others believe the fear grew during hard winters long ago, when hungry wolves came close to villages and took farm animals. No one can say for certain.</p>
+<p><span class="pl">D</span>Today, wild wolves have returned to several countries in Europe, and scientists there are watching how people and wolves share the land. Despite everything we have learned, the wolf most people meet first is still the one in the storybook.</p>
+</div>
+
+<div class="q"><div class="qt"><b>Q7.</b> Which is the best title for this text? <span class="tag">strategy: main idea</span> <span class="marks">4</span></div>
+<label class="opt"><input type="radio" name="r7" value="a">a. A Dangerous Hunter Returns</label>
+<label class="opt"><input type="radio" name="r7" value="b">b. The Wolf in the Story and the Wolf in the Forest</label>
+<label class="opt"><input type="radio" name="r7" value="c">c. How to Keep Sheep Safe from Wolves</label>
+</div>
+
+<div class="q"><div class="qt"><b>Q8.</b> In <b>Reading 2</b>, the writer uses <b>three</b> of these contrast signals. Tick the three this text uses. <span class="tag">strategy: contrast</span> <span class="marks">4</span></div>
+<label class="opt"><input type="checkbox" class="c8" value="however">however</label>
+<label class="opt"><input type="checkbox" class="c8" value="because">because</label>
+<label class="opt"><input type="checkbox" class="c8" value="eventhough">even though</label>
+<label class="opt"><input type="checkbox" class="c8" value="asaresult">as a result</label>
+<label class="opt"><input type="checkbox" class="c8" value="despite">despite</label>
+<label class="opt"><input type="checkbox" class="c8" value="forexample">for example</label>
+</div>
+
+<div class="q"><div class="qt"><b>Q9.</b> Fact or speculation? Choose <b>F</b> (a fact the text states) or <b>S</b> (an idea people hold, not proven). <span class="tag">strategy: fact vs speculation</span> <span class="marks">4 × 2</span></div>
+<div class="qt">1. Researchers followed wolf packs for years.
+<label style="margin-left:10px"><input type="radio" name="fs1" value="F"> F</label><label style="margin-left:10px"><input type="radio" name="fs1" value="S"> S</label></div>
+<div class="qt">2. The payment for lost sheep often arrives months late.
+<label style="margin-left:10px"><input type="radio" name="fs2" value="F"> F</label><label style="margin-left:10px"><input type="radio" name="fs2" value="S"> S</label></div>
+<div class="qt">3. Wolf stories were first told to keep children out of the forest.
+<label style="margin-left:10px"><input type="radio" name="fs3" value="F"> F</label><label style="margin-left:10px"><input type="radio" name="fs3" value="S"> S</label></div>
+<div class="qt">4. The fear of wolves began during hard winters long ago.
+<label style="margin-left:10px"><input type="radio" name="fs4" value="F"> F</label><label style="margin-left:10px"><input type="radio" name="fs4" value="S"> S</label></div>
+</div>
+
+<div class="q" data-anchor="1"><div class="qt"><b>Q10.</b> The writer ends: "the wolf most people meet first is still the one in the storybook." What does the writer mean? <span class="tag">strategy: inference</span> <span class="marks">4</span></div>
+<label class="opt"><input type="radio" name="r10" value="a">a. Most people learn about wolves from stories before they ever see a real one.</label>
+<label class="opt"><input type="radio" name="r10" value="b">b. Storybooks about wolves can be found in most libraries.</label>
+<label class="opt"><input type="radio" name="r10" value="c">c. Real wolves have disappeared from Europe.</label>
+</div>
+
+<div class="q"><div class="qt"><b>Q11.</b> "…to keep children from <b>wandering</b> into the forest alone." <i>Wandering</i> means: <span class="tag">strategy: guess from context</span> <span class="marks">3</span></div>
+<label class="opt"><input type="radio" name="r11" value="a">a. getting lost in a dangerous place</label>
+<label class="opt"><input type="radio" name="r11" value="b">b. walking around slowly with no clear plan</label>
+<label class="opt"><input type="radio" name="r11" value="c">c. exploring a place with a clear goal</label>
+</div>
+</section>
+
+<!-- ================= PART 3 WRITING ================= -->
+<section class="part" id="part3">
+<h2>Part 3 · Write <span class="marks">25 marks</span></h2>
+<div class="qt">Choose <b>ONE</b> question and write a short paragraph of <b>5–6 sentences</b>: your <b>point</b>, your <b>reason</b>, and <b>one example</b>.</div>
+<label class="opt"><input type="radio" name="wchoice" value="A">A. Should people protect wild animals that many of us are afraid of (for example, sharks or wolves)? Why?</label>
+<label class="opt"><input type="radio" name="wchoice" value="B">B. Why is it worth keeping old bones and fossils safe in museums? What can they tell us?</label>
+<div class="note">Use at least <b>two</b> of these words: <i>conservation · negative · remarkable · frightening · eventually · entire</i>. No sentence frames this time — you have done this in class and in homework.</div>
+<textarea id="writing" placeholder="Write your paragraph here…"></textarea>
+<div class="wordcount"><span id="wc">0</span> words</div>
+<div class="selfcheck">
+<b>Before you submit — tick what is true:</b>
+<label><input type="checkbox" id="sc1"> I answered the question I chose (point + reason + example).</label>
+<label><input type="checkbox" id="sc2"> I used at least two of the listed words.</label>
+<label><input type="checkbox" id="sc3"> I read my paragraph once more and fixed what did not make sense.</label>
+</div>
+</section>
+
+<div class="missWarn" id="missWarn"></div>
+<button class="btn" id="submitBtn">Finish &amp; see my scores</button>
+
+<!-- ================= RESULT ================= -->
+<section id="resultCard">
+<h2>Your results</h2>
+<div class="scoreRow">
+  <div class="scoreBox"><div>Words</div><div class="big" id="sVocab">–</div><div class="meta">/ 30</div></div>
+  <div class="scoreBox"><div>Old words (U2–4)</div><div class="big" id="sOld">–</div><div class="meta">/ 10 (inside Words)</div></div>
+  <div class="scoreBox"><div>Reading</div><div class="big" id="sRead">–</div><div class="meta">/ 45</div></div>
+  <div class="scoreBox"><div>Writing</div><div class="big">✍</div><div class="meta">teacher marks / 25</div></div>
+</div>
+<div id="speedFlag"></div>
+<h3>Reading — strategy by strategy</h3>
+<table class="stratTable" id="stratTable"><tr><th>Strategy</th><th>Score</th></tr></table>
+<h3>For your teacher — copy this whole box and send it the usual way</h3>
+<textarea id="copyBlock" readonly></textarea>
+<div class="note">Your writing is included in the box above. Your teacher will mark it with the class rubric.</div>
+</section>
+
+</div>
+<script>
+(function(){
+"use strict";
+var startTime = Date.now();
+
+// Answer key, lightly encoded (base64) so it is not readable at a glance in view-source.
+var KEY = JSON.parse(atob(
+"eyJ2MSI6WyJjb2xsZWN0aW9uIl0sInYyIjpbImVudGlyZSJdLCJ2MyI6WyJldmVudHVhbGx5Il0sInY0IjpbImRpc3BsYXllZCJdLCJ2NSI6WyJjcmVkaXRzIl0sInY2IjpbInNoYWxsb3ciXSwidjciOlsiZ2F0aGVyZWQiXSwidjgiOlsicG9sbHV0aW9uIl0sInY5IjpbInJlbGVhc2luZyJdLCJ2MTAiOlsiYnJpbGxpYW50Il0sIm8xIjpbImNvbnZpbmNlIl0sIm8yIjpbImRpdmVyc2UiXSwibzMiOlsiZW5zdXJlcyJdLCJvNCI6WyJsaWtlbHkiXSwibzUiOlsiZXZvbHZlZCJdLCJyMSI6ImMiLCJtMSI6ImQiLCJtMiI6ImEiLCJtMyI6ImIiLCJtNCI6ImMiLCJyMyI6ImEiLCJyNCI6ImIiLCJyNSI6ImEiLCJyNiI6ImMiLCJyNyI6ImIiLCJjOCI6WyJob3dldmVyIiwiZXZlbnRob3VnaCIsImRlc3BpdGUiXSwiZnMxIjoiRiIsImZzMiI6IkYiLCJmczMiOiJTIiwiZnM0IjoiUyIsInIxMCI6ImEiLCJyMTEiOiJiIn0="));
+
+function txt(id){ var el=document.getElementById(id); return (el&&el.value||"").trim().toLowerCase(); }
+function radio(name){ var r=document.querySelector('input[name="'+name+'"]:checked'); return r?r.value:""; }
+function sel(id){ var el=document.getElementById(id); return el?el.value:""; }
+
+// word counter
+var wEl=document.getElementById('writing');
+wEl.addEventListener('input',function(){
+  var n=(wEl.value.trim().match(/\S+/g)||[]).length;
+  document.getElementById('wc').textContent=n;
+});
+
+// limit Q8 to 3 picks
+document.querySelectorAll('.c8').forEach(function(cb){
+  cb.addEventListener('change',function(){
+    var picked=document.querySelectorAll('.c8:checked');
+    if(picked.length>3){ cb.checked=false; }
+  });
+});
+
+document.getElementById('submitBtn').addEventListener('click',function(){
+  // completeness check (soft)
+  var missing=[];
+  ["v1","v2","v3","v4","v5","v6","v7","v8","v9","v10","o1","o2","o3","o4","o5"].forEach(function(id){ if(!txt(id)) missing.push(id.toUpperCase()); });
+  ["r1","r3","r4","r5","r6","r7","fs1","fs2","fs3","fs4","r10","r11"].forEach(function(n){ if(!radio(n)) missing.push(n.toUpperCase()); });
+  ["m1","m2","m3","m4"].forEach(function(id){ if(!sel(id)) missing.push(id.toUpperCase()); });
+  var mw=document.getElementById('missWarn');
+  if(missing.length>0 && !this.dataset.forced){
+    mw.style.display='block';
+    mw.innerHTML='You left <b>'+missing.length+'</b> answers empty. Scroll back and check — or press the button again to submit anyway.';
+    this.dataset.forced='1';
+    return;
+  }
+  mw.style.display='none';
+
+  // ---- score vocab ----
+  var vocab=0, old=0;
+  function lev1(a,b){ // edit distance <= 1
+    if(a===b) return true;
+    if(Math.abs(a.length-b.length)>1) return false;
+    var i=0,j=0,edits=0;
+    while(i<a.length&&j<b.length){
+      if(a[i]===b[j]){i++;j++;continue;}
+      if(++edits>1) return false;
+      if(a.length>b.length){i++;}
+      else if(b.length>a.length){j++;}
+      else {i++;j++;}
+    }
+    return edits+(a.length-i)+(b.length-j)<=1;
+  }
+  function gapOK(id){
+    var v=txt(id); if(!v) return false;
+    return KEY[id].some(function(k){ return v===k || (k.length>=8 && lev1(v,k)); });
+  }
+  ["v1","v2","v3","v4","v5","v6","v7","v8","v9","v10"].forEach(function(id){
+    if(gapOK(id)) vocab+=2;
+  });
+  ["o1","o2","o3","o4","o5"].forEach(function(id){
+    if(gapOK(id)) old+=2;
+  });
+  var vocabTotal=vocab+old;
+
+  // ---- score reading with strategy buckets ----
+  var strat={"main idea":[0,8],"cause–effect":[0,8],"reference / inference":[0,8],
+             "word parts & context":[0,6],"analyzing claims":[0,3],"contrast":[0,4],"fact vs speculation":[0,8]};
+  var read=0;
+  function mark(pts,bucket,ok){ if(ok){read+=pts;strat[bucket][0]+=pts;} }
+  mark(4,"main idea",radio('r1')===KEY.r1);
+  var mOK=0;["m1","m2","m3","m4"].forEach(function(id){ if(sel(id)===KEY[id]) mOK++; });
+  mark(mOK,"cause–effect",true); read-=0; // mOK points, 1 each
+  strat["cause–effect"][0]+=0; // already added via mark(mOK,...)
+  mark(4,"cause–effect",radio('r3')===KEY.r3);
+  mark(4,"reference / inference",radio('r4')===KEY.r4);
+  mark(3,"word parts & context",radio('r5')===KEY.r5);
+  mark(3,"analyzing claims",radio('r6')===KEY.r6);
+  mark(4,"main idea",radio('r7')===KEY.r7);
+  var picks=[].slice.call(document.querySelectorAll('.c8:checked')).map(function(c){return c.value;});
+  var good=picks.filter(function(p){return KEY.c8.indexOf(p)>=0;}).length;
+  var bad=picks.length-good;
+  var q8=Math.max(0,(good===3&&bad===0)?4:(good-bad>0?good-bad:0));
+  mark(q8,"contrast",true);
+  ["fs1","fs2","fs3","fs4"].forEach(function(n){ mark(2,"fact vs speculation",radio(n)===KEY[n]); });
+  mark(4,"reference / inference",radio('r10')===KEY.r10);
+  mark(3,"word parts & context",radio('r11')===KEY.r11);
+
+  // ---- timing ----
+  var mins=Math.round((Date.now()-startTime)/60000);
+  var flagged=mins<15;
+
+  // ---- render ----
+  document.getElementById('sVocab').textContent=vocabTotal;
+  document.getElementById('sOld').textContent=old;
+  document.getElementById('sRead').textContent=read;
+  var st=document.getElementById('stratTable');
+  Object.keys(strat).forEach(function(k){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td>'+k+'</td><td>'+strat[k][0]+' / '+strat[k][1]+'</td>';
+    st.appendChild(tr);
+  });
+  var sf=document.getElementById('speedFlag');
+  if(flagged){ sf.innerHTML='<div class="flag">Finished in '+mins+' minutes — that is unusually fast. This attempt is marked for the teacher and will not be recorded automatically.</div>'; }
+
+  var lines=[];
+  lines.push('RE2-QUIZ-U5U6 | name: '+(document.getElementById('stuName').value||'(no name)'));
+  lines.push('time_min: '+mins+(flagged?' [FLAG: unusually fast — do not auto-record]':''));
+  lines.push('vocab: '+vocabTotal+'/30 (new: '+vocab+'/20, old_U2-4: '+old+'/10)');
+  lines.push('reading: '+read+'/45');
+  Object.keys(strat).forEach(function(k){ lines.push('  strategy | '+k+': '+strat[k][0]+'/'+strat[k][1]); });
+  lines.push('writing_choice: '+(radio('wchoice')||'(none)'));
+  lines.push('self_check: '+[ 'sc1','sc2','sc3' ].map(function(i){return document.getElementById(i).checked?'y':'n';}).join(''));
+  lines.push('--- writing (teacher marks /25 with class rubric) ---');
+  lines.push(document.getElementById('writing').value||'(empty)');
+  document.getElementById('copyBlock').value=lines.join('\n');
+
+  document.getElementById('resultCard').style.display='block';
+  this.disabled=true;
+  this.textContent='Submitted — scroll down for your results';
+  document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});
+});
+})();
+</script>
+</body>
+</html>
